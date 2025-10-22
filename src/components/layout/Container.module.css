@@ -1,0 +1,6 @@
+/* src/components/layout/Container.module.css */
+.container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 16px;
+}

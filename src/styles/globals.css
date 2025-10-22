@@ -1,0 +1,55 @@
+/* src/styles/globals.css */
+
+/* Fonts (pode trocar por suas favoritas) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@600;700&display=swap');
+
+:root {
+  --bg: #0b0f17;
+  --bg-elev: #121826;
+  --text: #e6edf3;
+  --muted: #96a0ae;
+  --primary: #4f46e5;   /* índigo */
+  --accent: #22d3ee;    /* ciano */
+  --border: #1f2937;
+
+  --container: 1200px;
+  --radius: 12px;
+  --shadow: 0 6px 20px rgba(0,0,0,0.25);
+  --nav-height: 64px;
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3 { font-family: Poppins, Inter, sans-serif; line-height: 1.2; margin: 0 0 0.5rem; }
+
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+
+/* Ajuda âncoras com navbar fixa */
+section { scroll-margin-top: var(--nav-height); }
+
+/* Visually hidden (acessibilidade) */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0);
+  white-space: nowrap; border: 0;
+}
+
+/* Utilities simples */
+.muted { color: var(--muted); }
+.container { max-width: var(--container); margin: 0 auto; padding: 0 16px; }

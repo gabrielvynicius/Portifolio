@@ -1,0 +1,87 @@
+/* src/sections/Hero.module.css */
+.hero {
+  padding: 48px 0 64px;
+  background:
+    radial-gradient(600px 200px at 20% -10%, rgba(79,70,229,0.25), transparent 60%),
+    radial-gradient(500px 200px at 90% 0%, rgba(34,211,238,0.2), transparent 60%);
+}
+
+.inner {
+  display: grid;
+  gap: 32px;
+  align-items: center;
+}
+
+@media (min-width: 900px) {
+  .inner { grid-template-columns: 1.2fr 1fr; }
+}
+
+.texts {}
+
+.greet {
+  color: var(--accent);
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  margin-bottom: 6px;
+}
+
+.title {
+  font-size: clamp(2rem, 4vw + 1rem, 3rem);
+  margin: 0 0 8px;
+}
+
+.subtitle {
+  color: var(--muted);
+  font-weight: 600;
+  margin: 0 0 12px;
+}
+
+.lead {
+  color: var(--muted);
+  margin-bottom: 18px;
+}
+
+.ctas {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.primaryCta, .secondaryCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  transition: transform .15s, background .2s, border-color .2s, color .2s;
+}
+
+.primaryCta {
+  background: var(--primary);
+  border-color: transparent;
+  color: white;
+  box-shadow: 0 6px 16px rgba(79,70,229,0.35);
+}
+
+.primaryCta:hover { transform: translateY(-1px); }
+
+.secondaryCta {
+  background: rgba(255,255,255,0.03);
+  color: var(--text);
+}
+
+.secondaryCta:hover {
+  background: rgba(255,255,255,0.06);
+  border-color: #2a3547;
+}
+
+.visual { display: grid; place-items: center; }
+
+.avatar {
+  width: 180px; height: 180px; border-radius: 50%;
+  background:
+    radial-gradient(100px 100px at 30% 30%, rgba(255,255,255,0.15), transparent 40%),
+    linear-gradient(135deg, var(--primary), var(--accent));
+  box-shadow: 0 20px 60px rgba(0,0,0,0.45), 0 0 40px rgba(34,211,238,0.25);
+}
