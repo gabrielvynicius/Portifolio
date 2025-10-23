@@ -1,0 +1,141 @@
+.conta-page {
+  padding: 24px;
+  color: #fff;
+  text-align: center;
+  background-color: #282c34;
+  min-height: 100vh;
+}
+
+.wizard-step {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.wizard-question {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+.wizard-input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  width: 200px;
+  text-align: center;
+}
+
+.wizard-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.wizard-button:hover {
+  background-color: #45a049;
+}
+
+/* Estilo das seções de resumo */
+.resumo-section {
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 500px;
+  text-align: left;
+}
+
+.resumo-principal {
+  background-color: #fff176; /* amarelo claro */
+  color: #000;
+}
+
+.resumo-divisao {
+  background-color: #90caf9; /* azul claro */
+  color: #000;
+}
+
+.resumo-section h3 {
+  margin-bottom: 10px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.resumo-section p {
+  margin: 6px 0;
+  font-size: 16px;
+}
+
+/* ===== Caixas lado a lado ===== */
+.resumo-divisao {
+  text-align: center;
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.resumo-boxes {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap; /* empilha em telas pequenas */
+  margin-top: 15px;
+}
+
+.resumo-box {
+  flex: 1;
+  min-width: 200px;
+  max-width: 250px;
+  background-color: #ffffff;
+  color: #000;
+  border-radius: 12px;
+  padding: 15px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.resumo-box:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
+}
+
+/* Mary */
+.resumo-mary {
+  background-color: #fff59d; /* amarelo suave */
+}
+
+/* Aluguel */
+.resumo-aluguel {
+  background-color: #90caf9; /* azul suave */
+}
+
+/* Responsividade */
+@media (max-width: 480px) {
+  .resumo-boxes {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .resumo-box {
+    width: 80%;
+  }
+}
+.wizard-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.voltar-button {
+  background-color: #f44336; /* vermelho */
+}
+
+.voltar-button:hover {
+  background-color: #d32f2f;
+}

@@ -60,3 +60,50 @@
   color: var(--text);
   background: rgba(255,255,255,0.05);
 }
+
+/* Deixe o contêiner do menu posicionado para ancorar o dropdown */
+.menu {
+  position: relative;
+}
+
+/* Triângulo/caret ao lado de “Projetos” */
+.caret {
+  margin-left: .35rem;
+  font-size: .8em;
+  opacity: .8;
+}
+
+/* Realce do link ativo (opcional) */
+.active {
+  opacity: 1;
+}
+
+/* Caixa do dropdown */
+.projectsDropdown {
+  position: absolute;
+  top: 100%;
+  /* ajuste left/right conforme seu layout */
+  right: 0; 
+  background: #0f172a;           /* azul bem escuro (tailwind slate-900 vibes) */
+  border: 1px solid #1f2937;     /* borda sutil */
+  border-radius: 8px;
+  padding: 6px 0;
+  min-width: 220px;
+  z-index: 1000;
+  box-shadow: 0 10px 30px rgba(0,0,0,.45);
+}
+
+/* Itens do dropdown */
+.dropdownItem {
+  display: block;
+  padding: 10px 14px;
+  color: #e5e7eb;                /* cinza claro */
+  text-decoration: none;
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+.dropdownItem:hover {
+  background: #111827;
+  color: #fff;
+}
