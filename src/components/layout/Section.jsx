@@ -13,5 +13,3 @@ export default function Section({ id, title, description, children }) {
     </section>
   );
 }
-``
-

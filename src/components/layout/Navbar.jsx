@@ -7,7 +7,7 @@ const LINKS = [
   { href: '#inicio', label: 'Início' },
   { href: '#sobre', label: 'Sobre' },
   { href: '#habilidades', label: 'Habilidades' },
-  { href: '#projetos', label: 'Projetos' }, // ← este vira o gatilho do dropdown
+  { href: '#projetos', label: 'Projetos' },
   { href: '#experiencia', label: 'Experiência' },
   { href: '#contato', label: 'Contato' },
 ];

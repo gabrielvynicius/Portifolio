@@ -1,10 +1,11 @@
 // src/sections/Hero.jsx
+import Section from '../components/layout/Section';
 import Container from '../components/layout/Container';
 import styles from './Hero.module.css';
 
 export default function Hero() {
   return (
-    <section id="inicio" className={styles.hero}>
+    <Section id="inicio" className={styles.hero}>
       <Container className={styles.inner}>
         <div className={styles.texts}>
           <p className={styles.greet}>Olá, eu sou</p>
@@ -23,7 +24,7 @@ export default function Hero() {
           </div>
         </div>
       </Container>
-    </section>
+    </Section>
   );
 }
 
