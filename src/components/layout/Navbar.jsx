@@ -1,96 +1,130 @@
 // src/components/layout/Navbar.jsx
-import { useState, useEffect, useRef } from 'react';
-import Container from './Container';
-import styles from './Navbar.module.css';
+import { useState, useEffect, useRef } from "react";
+import Container from "./Container";
+import styles from "./Navbar.module.css";
 
 const LINKS = [
-  { href: '#inicio', label: 'Início' },
-  { href: '#sobre', label: 'Sobre' },
-  { href: '#habilidades', label: 'Habilidades' },
-  { href: '#projetos', label: 'Projetos' },
-  { href: '#experiencia', label: 'Experiência' },
-  { href: '#contato', label: 'Contato' },
+  { href: "#inicio", label: "Início" },
+  { href: "#sobre", label: "Sobre" },
+  { href: "#habilidades", label: "Habilidades" },
+];
+
+const PROJETOS = [
+  { href: "#/projetos/conta-de-luz", label: "Conta de Luz" },
+  { href: "#outro-projeto", label: "Outro Projeto" },
 ];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [openProjects, setOpenProjects] = useState(false);
+
+  // refs: menu wrapper + hamburger button
   const menuRef = useRef(null);
+  const hamburgerRef = useRef(null);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Fecha dropdown ao clicar fora
+  // fecha ao clicar fora, MAS ignora cliques no hamburger
   useEffect(() => {
     function handleClickOutside(e) {
-      if (openProjects && menuRef.current && !menuRef.current.contains(e.target)) {
+      // se menu não aberto, nada a fazer
+      if (!isMobileMenuOpen && !openProjects) return;
+
+      const target = e.target;
+      const clickedInsideMenu = menuRef.current && menuRef.current.contains(target);
+      const clickedHamburger = hamburgerRef.current && hamburgerRef.current.contains(target);
+
+      // se clicou fora do menu e fora do hambúrguer, fecha tudo
+      if (!clickedInsideMenu && !clickedHamburger) {
+        setIsMobileMenuOpen(false);
         setOpenProjects(false);
       }
     }
 
-    const handleHashChange = () => setOpenProjects(false);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [isMobileMenuOpen, openProjects]);
 
-    document.addEventListener('mousedown', handleClickOutside);
-    window.addEventListener('hashchange', handleHashChange);
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-      window.removeEventListener('hashchange', handleHashChange);
-    };
-  }, [openProjects]);
+  const handleLinkClick = (isProjetos = false) => (e) => {
+    if (isProjetos) {
+      // Só previne navegação no botão Projetos (abre/fecha submenu)
+      e.preventDefault();
+      setOpenProjects((v) => !v);
+    } else {
+      // Fecha tudo ao clicar em links comuns
+      setIsMobileMenuOpen(false);
+      setOpenProjects(false);
+    }
+  };
 
   return (
-    <header className={`${styles.nav} ${scrolled ? styles.scrolled : ''}`}>
+    <nav className={`${styles.nav} ${scrolled ? styles.scrolled : ""}`}>
       <Container className={styles.inner}>
-        {/* Logo */}
         <a href="#inicio" className={styles.logo}>
-          <span className={styles.logoText}>Gabriel Vynicius</span>
+          <span className={styles.logoText}>Portfolio</span>
         </a>
 
-        {/* Menu principal */}
-        <nav className={styles.menu} aria-label="Navegação principal" ref={menuRef}>
-          {LINKS.map(({ href, label }) => {
-            const isProjetos = href === '#projetos';
-            return (
-              <a
-                key={href}
-                href={href}
-                className={`${styles.link} ${isProjetos && openProjects ? styles.active : ''}`}
-                onClick={
-                  isProjetos
-                    ? (e) => {
-                        e.preventDefault();
-                        setOpenProjects((v) => !v);
-                      }
-                    : undefined
-                }
-                aria-haspopup={isProjetos ? 'true' : undefined}
-                aria-expanded={isProjetos ? openProjects : undefined}
-              >
-                {label}
-                {isProjetos && <span className={styles.caret}>▾</span>}
-              </a>
-            );
-          })}
+        {/* Hambúrguer (tem ref pra evitar que clique nele seja considerado "fora") */}
+        <button
+          ref={hamburgerRef}
+          className={styles.hamburger}
+          onClick={() => setIsMobileMenuOpen((v) => !v)}
+          aria-label="Abrir menu"
+          aria-expanded={isMobileMenuOpen}
+        >
+          {/* você pode trocar por svg/ícone */}
+          ☰
+        </button>
 
-          {/* Dropdown de Projetos */}
-          {openProjects && (
-            <div className={styles.projectsDropdown} role="menu" aria-label="Projetos">
-              <a href="#/projetos/conta-de-luz" className={styles.dropdownItem}>
-                Conta de Luz
-              </a>
-              {/* Exemplo para adicionar mais itens:
-              <a href="#/projetos/outro-projeto" className={styles.dropdownItem}>
-                Outro Projeto
-              </a> */}
-            </div>
-          )}
-        </nav>
+        {/* Menu wrapper — contém menu e dropdown; tem ref */}
+        <div
+          ref={menuRef}
+          className={`${styles.menu} ${isMobileMenuOpen ? styles.menuOpen : ""}`}
+        >
+          {LINKS.map(({ href, label }) => (
+            <a key={href} href={href} className={styles.link} onClick={handleLinkClick()}>
+              {label}
+            </a>
+          ))}
+
+          {/* Dropdown Projetos */}
+          <div className={styles.dropdownWrapper}>
+            <a
+              href="#projetos"
+              className={styles.link}
+              onClick={handleLinkClick(true)}
+              aria-haspopup="true"
+              aria-expanded={openProjects}
+            >
+              Projetos <span className={styles.caret}>{openProjects ? "▴" : "▾"}</span>
+            </a>
+
+            {openProjects && (
+              <div className={styles.projectsDropdown} role="menu" aria-label="Projetos">
+                {PROJETOS.map(({ href, label }) => (
+                  <a
+                    key={href}
+                    href={href}
+                    className={styles.dropdownItem}
+                    onClick={handleLinkClick()}
+                  >
+                    {label}
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <a href="#contato" className={styles.link} onClick={handleLinkClick()}>
+            Contato
+          </a>
+        </div>
       </Container>
-    </header>
+    </nav>
   );
 }
